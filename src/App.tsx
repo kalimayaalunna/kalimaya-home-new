@@ -27,11 +27,14 @@ import Testimonials from "./components/Testimonials";
 import InquiryForm from "./components/InquiryForm";
 import StrawberryJamDetail from "./components/StrawberryJamDetail";
 import ToppingKurmaDetail from "./components/ToppingKurmaDetail";
+import TamarraBrowniesDetail from "./components/TamarraBrowniesDetail";
+import PureStrawberryDetail from "./components/PureStrawberryDetail";
+import DateJamDetail from "./components/DateJamDetail";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [simulatedSpec, setSimulatedSpec] = useState("");
-  const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma">("home");
+  const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma" | "tamarra-brownies-chips" | "pure-strawberry" | "date-jam">("home");
   const [showFixedHeader, setShowFixedHeader] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -253,6 +256,18 @@ export default function App() {
                   setCurrentPage("topping-kurma");
                   window.scrollTo({ top: 0, behavior: "instant" });
                 }}
+                onViewDetailedTamarraBrownies={() => {
+                  setCurrentPage("tamarra-brownies-chips");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
+                onViewDetailedPureStrawberry={() => {
+                  setCurrentPage("pure-strawberry");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
+                onViewDetailedDateJam={() => {
+                  setCurrentPage("date-jam");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
               />
             </div>
 
@@ -314,8 +329,50 @@ export default function App() {
               }, 150);
             }}
           />
-        ) : (
+        ) : currentPage === "topping-kurma" ? (
           <ToppingKurmaDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : currentPage === "tamarra-brownies-chips" ? (
+          <TamarraBrowniesDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : currentPage === "pure-strawberry" ? (
+          <PureStrawberryDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : (
+          <DateJamDetail
             onBack={() => {
               setCurrentPage("home");
               window.scrollTo({ top: 0, behavior: "instant" });

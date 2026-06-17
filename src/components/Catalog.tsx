@@ -24,6 +24,9 @@ interface CatalogProps {
   onOpenSampleForm: () => void;
   onViewDetailedStrawberryJam?: () => void;
   onViewDetailedToppingKurma?: () => void;
+  onViewDetailedTamarraBrownies?: () => void;
+  onViewDetailedPureStrawberry?: () => void;
+  onViewDetailedDateJam?: () => void;
 }
 
 // Map each product to its specific gradient styling matching the screenshot precisely
@@ -54,7 +57,7 @@ const PRODUCT_STYLES: Record<string, { gradient: string }> = {
   }
 };
 
-export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam, onViewDetailedToppingKurma }: CatalogProps) {
+export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam, onViewDetailedToppingKurma, onViewDetailedTamarraBrownies, onViewDetailedPureStrawberry, onViewDetailedDateJam }: CatalogProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleInquiryRedirect = () => {
@@ -111,6 +114,12 @@ export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam,
                         onViewDetailedStrawberryJam();
                       } else if (product.id === "prod-topping-kurma" && onViewDetailedToppingKurma) {
                         onViewDetailedToppingKurma();
+                      } else if (product.id === "prod-tamarra-brownies-chips" && onViewDetailedTamarraBrownies) {
+                        onViewDetailedTamarraBrownies();
+                      } else if (product.id === "prod-pure-strawberry" && onViewDetailedPureStrawberry) {
+                        onViewDetailedPureStrawberry();
+                      } else if (product.id === "prod-date-jam" && onViewDetailedDateJam) {
+                        onViewDetailedDateJam();
                       } else {
                         setSelectedProduct(product);
                       }
