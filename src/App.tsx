@@ -14,7 +14,8 @@ import {
   ShieldCheck,
   ClipboardList,
   ArrowLeft,
-  ShoppingBag
+  ShoppingBag,
+  MessageCircle
 } from "lucide-react";
 
 import Hero from "./components/Hero";
@@ -32,17 +33,27 @@ export default function App() {
   const [simulatedSpec, setSimulatedSpec] = useState("");
   const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma">("home");
   const [showFixedHeader, setShowFixedHeader] = useState(false);
+  const [showWhatsApp, setShowWhatsApp] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // Scroll tracking hook
   React.useEffect(() => {
     const handleScroll = () => {
+      if (currentPage !== "home") {
+        setShowWhatsApp(true);
+        return;
+      }
       if (!aboutRef.current) {
+        const hasScrolledPastHero = window.scrollY >= 400;
         setShowFixedHeader(window.scrollY >= 700);
+        setShowWhatsApp(hasScrolledPastHero);
         return;
       }
       const rect = aboutRef.current.getBoundingClientRect();
-      // Show header when "Regulasi & Keamanan" reaches near top of viewport (offset 100px)
+      // Show header when "Regulasi & Keamanan" (Certifications) reaches near top of viewport (offset 100px)
+      const passedHero = rect.top <= 250;
       setShowFixedHeader(rect.top <= 100);
+      setShowWhatsApp(passedHero);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -53,6 +64,37 @@ export default function App() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [currentPage]);
+
+  // Periodic tooltip trigger "tanya-tanya disini"
+  React.useEffect(() => {
+    if (!showWhatsApp) {
+      setShowTooltip(false);
+      return;
+    }
+
+    // Cycle duration: 5 seconds total (visible for 2.5s, invisible for 2.5s)
+    const interval = setInterval(() => {
+      setShowTooltip(true);
+      const hideTimeout = setTimeout(() => {
+        setShowTooltip(false);
+      }, 2500);
+      return () => clearTimeout(hideTimeout);
+    }, 5000);
+
+    // Initial delay trigger for immediate attention hook
+    const initialShow = setTimeout(() => {
+      setShowTooltip(true);
+      const hideInitial = setTimeout(() => {
+        setShowTooltip(false);
+      }, 2500);
+      return () => clearTimeout(hideInitial);
+    }, 1500);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(initialShow);
+    };
+  }, [showWhatsApp]);
 
   // Scroll references
   const catalogRef = useRef<HTMLDivElement>(null);
@@ -356,6 +398,52 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* FLOATING WHATSAPP BUTTON (CONVERSION CATALYST FOR B2B CLIENTS) */}
+      <AnimatePresence>
+        {showWhatsApp && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 50 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none"
+            id="whatsapp-floater-container"
+          >
+            {/* Tooltip Chat Bubble with 5s Interval toggle */}
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="bg-white text-slate-800 text-[11.5px] font-sans font-bold py-2 px-3.5 rounded-2xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] border border-slate-100 mb-2 relative pointer-events-auto mr-1 block text-center whitespace-nowrap"
+                  id="whatsapp-tooltip"
+                >
+                  {/* Speech Bubble Arrow */}
+                  <div className="absolute bottom-[-5px] right-5 w-2.5 h-2.5 bg-white border-r border-b border-slate-100 rotate-45" />
+                  tanya-tanya disini
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Glowing WA Button */}
+            <a 
+              href="https://wa.me/6282134567890?text=Halo%20PT%20Kalimaya%20Indonesia%2C%20saya%20tertarik%20dengan%20bahan%20baku%20premium%20untuk%20bisnis%20F%26B%20saya."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#25D366] hover:bg-[#20ba56] text-white p-4 rounded-full shadow-[0_6px_24px_rgba(37,211,102,0.4)] flex items-center justify-center transition-all duration-300 pointer-events-auto hover:scale-110 active:scale-95 group relative border-2 border-white/20"
+              title="Hubungi Kami di WhatsApp"
+              id="whatsapp-floater-btn"
+            >
+              {/* External subtle glow ring */}
+              <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping duration-1500 scale-105 pointer-events-none -z-10" />
+              <MessageCircle className="w-6 h-6 fill-white stroke-[2.5]" />
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
