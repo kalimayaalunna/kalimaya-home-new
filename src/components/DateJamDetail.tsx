@@ -40,7 +40,17 @@ export default function DateJamDetail({ onBack, onInquire }: DateJamDetailProps)
               <ArrowLeft className="w-3.5 h-3.5" />
               Kembali
             </button>
-            <span className="font-display font-extrabold text-white text-lg tracking-wider hidden sm:inline ml-2">PT. Kalimaya</span>
+            <div className="flex items-center gap-2.5 ml-2">
+              <img 
+                src="https://kalimayaindonesia.com/wp-content/uploads/2025/12/cropped-cropped-Kalimaya-02-1-scaled-1-200x48.png.webp" 
+                alt="PT Kalimaya Alunna Indonesia Logo" 
+                className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
+                referrerPolicy="no-referrer"
+              />
+              <span className="font-sans font-black text-white text-xs sm:text-sm tracking-wider hidden xl:inline">
+                PT Kalimaya Alunna Indonesia
+              </span>
+            </div>
           </div>
           
           <div className="flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-white/90">
@@ -315,19 +325,24 @@ export default function DateJamDetail({ onBack, onInquire }: DateJamDetailProps)
       </section>
 
       {/* FOOTER CALL-TO-ACTION FOR B2B DISTRIBUTION & RETAIL */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100" id="date-jam-b2b">
+      <section className="py-20 bg-[#0D58C8] text-white border-t border-white/10" id="date-jam-b2b">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-6">
-          <Bookmark className="w-10 h-10 text-[#0D58C8] mx-auto opacity-75" />
-          <h2 className="font-sans font-extrabold text-[#0A3D91] text-3xl">
+          <img 
+            src="https://kalimayaindonesia.com/wp-content/uploads/2026/02/favicon-blue.png" 
+            alt="PT Kalimaya Alunna Indonesia Favicon" 
+            className="w-14 h-14 mx-auto object-contain brightness-0 invert"
+            referrerPolicy="no-referrer"
+          />
+          <h2 className="font-sans font-extrabold text-white text-3xl">
             Sediakan Solusi Sehat Bernutrisi Alami pada Gerai Anda
           </h2>
-          <p className="font-sans text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Sambut permintaan pasar keluarga modern terhadap produk MPASI murni berkualitas tinggi. Kami membuka kemitraan eksklusif bagi distributor regional, apotek, butik bayi, and supermarket nasional dengan penawaran margins terbaik.
+          <p className="font-sans text-blue-100 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            PT Kalimaya Alunna Indonesia membuka kemitraan eksklusif bagi distributor regional, apotek, butik bayi, dan supermarket nasional untuk menyambut permintaan pasar keluarga modern terhadap produk MPASI murni berkualitas tinggi dengan penawaran margins optimal.
           </p>
           <div className="pt-4">
             <button 
               onClick={handleRequestSample}
-              className="px-8 py-4 bg-[#0D58C8] hover:bg-[#0a48a9] text-white font-sans text-xs font-bold uppercase tracking-wider rounded-xl transition duration-200 cursor-pointer shadow-lg shadow-blue-900/15"
+              className="px-8 py-4 bg-white hover:bg-blue-50 text-[#0D58C8] font-sans text-xs font-bold uppercase tracking-wider rounded-xl transition duration-200 cursor-pointer shadow-lg"
             >
               Hubungi Sales & Partner Executive
             </button>
