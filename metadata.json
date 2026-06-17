@@ -1,0 +1,6 @@
+{
+  "name": "Kalimaya Indonesia B2B",
+  "description": "B2B Premium Jam & Flavorings Supplier for Bakery, Pastry, and F&B Businesses",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
