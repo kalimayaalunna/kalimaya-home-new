@@ -30,11 +30,12 @@ import ToppingKurmaDetail from "./components/ToppingKurmaDetail";
 import TamarraBrowniesDetail from "./components/TamarraBrowniesDetail";
 import PureStrawberryDetail from "./components/PureStrawberryDetail";
 import DateJamDetail from "./components/DateJamDetail";
+import AboutDetail from "./components/AboutDetail";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [simulatedSpec, setSimulatedSpec] = useState("");
-  const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma" | "tamarra-brownies-chips" | "pure-strawberry" | "date-jam">("home");
+  const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma" | "tamarra-brownies-chips" | "pure-strawberry" | "date-jam" | "about">("home");
   const [showFixedHeader, setShowFixedHeader] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -136,7 +137,10 @@ export default function App() {
             {/* Desktop Navigation Links (matching screenshot precisely with HOME removed) */}
             <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest uppercase text-white/90">
               <button 
-                onClick={() => scrollTo(aboutRef)} 
+                onClick={() => {
+                  setCurrentPage("about");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }} 
                 className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
               >
                 ABOUT
@@ -188,7 +192,11 @@ export default function App() {
             className="md:hidden fixed inset-x-0 top-20 bg-[#0D58C8] text-white border-b border-white/10 shadow-xl z-40 p-6 flex flex-col gap-4 text-xs font-bold tracking-widest uppercase text-left"
           >
             <button 
-              onClick={() => scrollTo(aboutRef)} 
+              onClick={() => {
+                setCurrentPage("about");
+                setMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: "instant" });
+              }} 
               className="py-3 hover:text-amber-300 border-b border-white/10 text-left cursor-pointer"
             >
               ABOUT
@@ -354,8 +362,22 @@ export default function App() {
               }, 150);
             }}
           />
-        ) : (
+        ) : currentPage === "date-jam" ? (
           <DateJamDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : (
+          <AboutDetail
             onBack={() => {
               setCurrentPage("home");
               window.scrollTo({ top: 0, behavior: "instant" });
