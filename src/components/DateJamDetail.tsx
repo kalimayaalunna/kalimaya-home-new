@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowLeft, 
@@ -22,6 +23,20 @@ interface DateJamDetailProps {
 }
 
 export default function DateJamDetail({ onBack, onInquire }: DateJamDetailProps) {
+  const [showFixedHeader, setShowFixedHeader] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowFixedHeader(true);
+      } else {
+        setShowFixedHeader(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleRequestSample = () => {
     onInquire("Halo Kalimaya, saya sangat tertarik dengan Selai Kurma MPASI (DATE JAM) Alunna untuk kebutuhan bisnis / suplai retail kami. Mohon informasi harga dan cara pengiriman sampel.");
   };
@@ -30,7 +45,7 @@ export default function DateJamDetail({ onBack, onInquire }: DateJamDetailProps)
     <div className="bg-white min-h-screen text-slate-800 font-sans">
       
       {/* HEADER SECTION - MIMICKING THE EMBEDDED NAVIGATION BAR */}
-      <div className="bg-[#0A3D91] text-white">
+      <div className={`fixed top-0 left-0 right-0 z-50 bg-[#0A3D91] text-white shadow-xl transition-all duration-500 ease-out transform ${showFixedHeader ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-2">
             <button 
@@ -73,9 +88,24 @@ export default function DateJamDetail({ onBack, onInquire }: DateJamDetailProps)
 
       {/* SECTION 1: HERO - COMPLIANT WITH THE FIRST SCREENSHOT */}
       <div 
-        className="relative bg-gradient-to-r from-[#0A3D91] via-[#0D58C8] to-[#0A3D91] text-white overflow-hidden pb-24 pt-16"
+        className="relative bg-gradient-to-r from-[#0A3D91] via-[#0D58C8] to-[#0A3D91] text-white overflow-hidden pb-24 pt-10"
         id="date-jam-hero"
       >
+        {/* Top bar with back button inside hero since the header is initially hidden */}
+        <div className="relative z-20 max-w-7xl mx-auto px-6 flex items-center justify-between mb-8">
+          <button 
+            onClick={onBack}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold uppercase tracking-wider transition duration-300 cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Kembali
+          </button>
+          
+          <div className="flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
+            100% Organik & MPASI Murni
+          </div>
+        </div>
         {/* Subtle Decorative Grid Pattern Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.06] pointer-events-none" />
         

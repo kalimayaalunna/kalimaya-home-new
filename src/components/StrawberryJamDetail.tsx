@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
   ArrowLeft, 
@@ -14,7 +15,8 @@ import {
   Leaf, 
   Flame, 
   Info,
-  Apple
+  Apple,
+  CheckCircle2
 } from "lucide-react";
 
 interface StrawberryJamDetailProps {
@@ -23,6 +25,20 @@ interface StrawberryJamDetailProps {
 }
 
 export default function StrawberryJamDetail({ onBack, onInquire }: StrawberryJamDetailProps) {
+  const [showFixedHeader, setShowFixedHeader] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowFixedHeader(true);
+      } else {
+        setShowFixedHeader(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleRequestSample = () => {
     onInquire("Halo Kalimaya, saya sangat tertarik untuk memesan / meminta sampel uji coba KALIMAYA STRAWBERRY JAM.");
   };
@@ -30,9 +46,67 @@ export default function StrawberryJamDetail({ onBack, onInquire }: StrawberryJam
   return (
     <div className="bg-white min-h-screen text-slate-800 font-sans">
       
+      {/* HEADER SECTION - SCROLL DEPENDENT */}
+      <div className={`fixed top-0 left-0 right-0 z-50 bg-[#0A3D91] text-white shadow-xl transition-all duration-500 ease-out transform ${showFixedHeader ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}>
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between border-b border-white/10">
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={onBack}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] font-bold uppercase tracking-wider transition duration-200 cursor-pointer"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Kembali
+            </button>
+            <div className="flex items-center gap-2.5 ml-2">
+              <img 
+                src="https://kalimayaindonesia.com/wp-content/uploads/2025/12/cropped-cropped-Kalimaya-02-1-scaled-1-200x48.png.webp" 
+                alt="PT Kalimaya Alunna Indonesia Logo" 
+                className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
+                referrerPolicy="no-referrer"
+              />
+              <span className="font-sans font-black text-white text-xs sm:text-sm tracking-wider hidden xl:inline">
+                PT Kalimaya Alunna Indonesia
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-white/90">
+            <span className="cursor-pointer hover:text-white transition duration-200" onClick={onBack}>Home</span>
+            <span className="cursor-pointer hover:text-white transition duration-200" onClick={onBack}>About</span>
+            <span className="cursor-pointer hover:text-white transition duration-200" onClick={handleRequestSample}>Blog</span>
+            <span className="cursor-pointer hover:text-white transition duration-200" onClick={handleRequestSample}>Contact</span>
+          </div>
+
+          <div>
+            <button 
+              onClick={handleRequestSample}
+              className="px-4 py-2 rounded-full border border-white hover:bg-white hover:text-[#0D58C8] text-xs font-bold uppercase tracking-wider transition-all duration-300"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* SECTION 1: CUSTOM NAVIGATION & HERO HEADER IN ONE IMMERSIVE GRADIENT AREA */}
-      <div className="relative bg-gradient-to-b from-[#0a4d95] via-[#095aa4] to-[#126bbf] text-white overflow-hidden pb-16 sm:pb-24">
+      <div className="relative bg-gradient-to-b from-[#0a4d95] via-[#095aa4] to-[#126bbf] text-white overflow-hidden pb-16 sm:pb-24 pt-8">
         
+        {/* Back navigation & Badges Row inside Hero */}
+        <div className="relative z-20 max-w-7xl mx-auto px-6 flex items-center justify-between mb-2">
+          <button 
+            onClick={onBack}
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold uppercase tracking-wider transition duration-300 cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Kembali
+          </button>
+          
+          <div className="flex items-center gap-2 bg-rose-500/15 border border-rose-500/30 text-rose-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+            <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 stroke-[3]" />
+            100% Buah Stroberi Pilihan
+          </div>
+        </div>
+
         {/* Subtle Faded Strawberries Background Patterns */}
         <div 
           className="absolute inset-0 opacity-15 mix-blend-overlay pointer-events-none bg-cover bg-center" 

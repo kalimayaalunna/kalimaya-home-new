@@ -117,87 +117,70 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-700 selection:bg-blue-100 selection:text-[#085aa4]">
       
       {/* PROFESSIONAL B2B BRAND HEADER & NAV */}
-      <header className={`${
-        currentPage === "home" ? "fixed top-0 left-0 right-0" : "sticky top-0"
-      } z-50 bg-[#0D58C8] border-b border-white/10 text-white shadow-md transition-all duration-500 transform ${
-        (currentPage === "home" && !showFixedHeader) 
-          ? "opacity-0 -translate-y-full pointer-events-none" 
-          : "opacity-100 translate-y-0"
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          
-          {/* Logo brand and back arrow */}
-          <div className="flex items-center gap-3 animate-fade-in">
-            {currentPage !== "home" && (
-              <button 
+      {currentPage === "home" && (
+        <header className="fixed top-0 left-0 right-0 z-50 bg-[#0D58C8] border-b border-white/10 text-white shadow-md transition-all duration-500 transform opacity-100 translate-y-0">
+          <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            {/* Logo brand and back arrow */}
+            <div className="flex items-center gap-3 animate-fade-in">
+              <span 
                 onClick={() => {
-                  setCurrentPage("home");
-                  window.scrollTo({ top: 0, behavior: "instant" });
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className="p-2 -ml-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition cursor-pointer"
-                title="Kembali ke Beranda"
+                className="font-serif font-black italic text-2xl tracking-normal text-white hover:opacity-90 cursor-pointer select-none"
               >
-                <ArrowLeft className="w-5 h-5" />
+                Kalimaya
+              </span>
+            </div>
+
+            {/* Desktop Navigation Links (matching screenshot precisely with HOME removed) */}
+            <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest uppercase text-white/90">
+              <button 
+                onClick={() => scrollTo(aboutRef)} 
+                className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
+              >
+                ABOUT
               </button>
-            )}
-            <span 
-              onClick={() => {
-                setCurrentPage("home");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="font-serif font-black italic text-2xl tracking-normal text-white hover:opacity-90 cursor-pointer select-none"
-            >
-              Kalimaya
-            </span>
+              <button 
+                onClick={() => scrollTo(testimonialsRef)} 
+                className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
+              >
+                BLOG
+              </button>
+              <button 
+                onClick={() => scrollTo(inquiryRef)} 
+                className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
+              >
+                CONTACT
+              </button>
+            </nav>
+
+            {/* Right Header Controls (Shopping bag & CONTACT US Outlined Pill) */}
+            <div className="flex items-center gap-6">
+              <ShoppingBag className="w-5 h-5 text-white/90 hover:text-white cursor-pointer transition hidden sm:block" />
+              <button 
+                onClick={() => scrollTo(inquiryRef)}
+                className="border border-white/60 hover:bg-white hover:text-[#0D58C8] hover:border-white transition duration-300 text-[11px] font-bold tracking-wider uppercase px-5 py-2.5 rounded-full cursor-pointer"
+              >
+                CONTACT US
+              </button>
+
+              {/* Tablet/Mobile Menu Trigger Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 hover:bg-white/10 text-white rounded-xl transition"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+
           </div>
-
-          {/* Desktop Navigation Links (matching screenshot precisely with HOME removed) */}
-          <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest uppercase text-white/90">
-            <button 
-              onClick={() => scrollTo(aboutRef)} 
-              className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
-            >
-              ABOUT
-            </button>
-            <button 
-              onClick={() => scrollTo(testimonialsRef)} 
-              className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
-            >
-              BLOG
-            </button>
-            <button 
-              onClick={() => scrollTo(inquiryRef)} 
-              className="hover:text-amber-300 transition duration-200 cursor-pointer text-left"
-            >
-              CONTACT
-            </button>
-          </nav>
-
-          {/* Right Header Controls (Shopping bag & CONTACT US Outlined Pill) */}
-          <div className="flex items-center gap-6">
-            <ShoppingBag className="w-5 h-5 text-white/90 hover:text-white cursor-pointer transition hidden sm:block" />
-            <button 
-              onClick={() => scrollTo(inquiryRef)}
-              className="border border-white/60 hover:bg-white hover:text-[#0D58C8] hover:border-white transition duration-300 text-[11px] font-bold tracking-wider uppercase px-5 py-2.5 rounded-full cursor-pointer"
-            >
-              CONTACT US
-            </button>
-
-            {/* Tablet/Mobile Menu Trigger Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-white/10 text-white rounded-xl transition"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-        </div>
-      </header>
+        </header>
+      )}
 
       {/* MOBILE DRAWER */}
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {currentPage === "home" && mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -398,7 +381,7 @@ export default function App() {
               <span className="font-display font-extrabold text-white text-xs">KI</span>
             </div>
             <span className="font-display font-bold text-white text-base tracking-tight uppercase">
-              PT. Kalimaya Indonesia
+              PT Kalimaya Alunna Indonesia
             </span>
           </div>
 
@@ -448,7 +431,7 @@ export default function App() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-3 font-sans text-[11px] text-slate-500">
-          <p>© {new Date().getFullYear()} PT. Kalimaya Indonesia. Seluruh Hak Cipta Dilindungi.</p>
+          <p>© {new Date().getFullYear()} PT Kalimaya Alunna Indonesia. Seluruh Hak Cipta Dilindungi.</p>
           <div className="flex gap-4">
             <span className="hover:text-slate-400 cursor-pointer">Syarat & Ketentuan Pasokan</span>
             <span className="hover:text-slate-450 cursor-pointer">Kebijakan Privasi</span>
