@@ -31,11 +31,14 @@ import TamarraBrowniesDetail from "./components/TamarraBrowniesDetail";
 import PureStrawberryDetail from "./components/PureStrawberryDetail";
 import DateJamDetail from "./components/DateJamDetail";
 import AboutDetail from "./components/AboutDetail";
+import DateSeedDrinkDetail from "./components/DateSeedDrinkDetail";
+import DatesCookiesDetail from "./components/DatesCookiesDetail";
+import SusuKurmaDetail from "./components/SusuKurmaDetail";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [simulatedSpec, setSimulatedSpec] = useState("");
-  const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma" | "tamarra-brownies-chips" | "pure-strawberry" | "date-jam" | "about">("home");
+  const [currentPage, setCurrentPage] = useState<"home" | "strawberry-jam" | "topping-kurma" | "tamarra-brownies-chips" | "pure-strawberry" | "date-jam" | "about" | "date-seed-drink" | "dates-cookies" | "susu-kurma">("home");
   const [showFixedHeader, setShowFixedHeader] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -119,7 +122,11 @@ export default function App() {
       
       {/* PROFESSIONAL B2B BRAND HEADER & NAV */}
       {currentPage === "home" && (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-[#0D58C8] border-b border-white/10 text-white shadow-md transition-all duration-500 transform opacity-100 translate-y-0">
+        <header className={`fixed top-0 left-0 right-0 z-50 bg-[#0D58C8] border-b border-white/10 text-white shadow-md transition-all duration-500 ease-out transform ${
+          showFixedHeader 
+            ? "translate-y-0 opacity-100" 
+            : "-translate-y-full opacity-0 pointer-events-none"
+        }`}>
           <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             
             {/* Logo brand and back arrow */}
@@ -172,7 +179,7 @@ export default function App() {
               {/* Tablet/Mobile Menu Trigger Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 hover:bg-white/10 text-white rounded-xl transition"
+                className="md:hidden p-3 min-h-[44px] min-w-[44px] flex items-center justify-center hover:bg-white/10 text-white rounded-xl transition"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -197,19 +204,19 @@ export default function App() {
                 setMobileMenuOpen(false);
                 window.scrollTo({ top: 0, behavior: "instant" });
               }} 
-              className="py-3 hover:text-amber-300 border-b border-white/10 text-left cursor-pointer"
+              className="py-4 min-h-[48px] hover:text-amber-300 border-b border-white/10 text-left block w-full cursor-pointer"
             >
               ABOUT
             </button>
             <button 
               onClick={() => scrollTo(testimonialsRef)} 
-              className="py-3 hover:text-amber-300 border-b border-white/10 text-left cursor-pointer"
+              className="py-4 min-h-[48px] hover:text-amber-300 border-b border-white/10 text-left block w-full cursor-pointer"
             >
               BLOG
             </button>
             <button 
               onClick={() => scrollTo(inquiryRef)} 
-              className="py-3 hover:text-amber-300 border-b border-white/10 text-left cursor-pointer"
+              className="py-4 min-h-[48px] hover:text-amber-300 border-b border-white/10 text-left block w-full cursor-pointer"
             >
               CONTACT
             </button>
@@ -257,6 +264,18 @@ export default function App() {
                 }}
                 onViewDetailedDateJam={() => {
                   setCurrentPage("date-jam");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
+                onViewDetailedDateSeedDrink={() => {
+                  setCurrentPage("date-seed-drink");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
+                onViewDetailedDatesCookies={() => {
+                  setCurrentPage("dates-cookies");
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
+                onViewDetailedSusuKurma={() => {
+                  setCurrentPage("susu-kurma");
                   window.scrollTo({ top: 0, behavior: "instant" });
                 }}
               />
@@ -364,6 +383,48 @@ export default function App() {
           />
         ) : currentPage === "date-jam" ? (
           <DateJamDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : currentPage === "date-seed-drink" ? (
+          <DateSeedDrinkDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : currentPage === "dates-cookies" ? (
+          <DatesCookiesDetail
+            onBack={() => {
+              setCurrentPage("home");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+            onInquire={(needsText) => {
+              setSimulatedSpec(needsText);
+              setCurrentPage("home");
+              setTimeout(() => {
+                scrollTo(inquiryRef);
+              }, 150);
+            }}
+          />
+        ) : currentPage === "susu-kurma" ? (
+          <SusuKurmaDetail
             onBack={() => {
               setCurrentPage("home");
               window.scrollTo({ top: 0, behavior: "instant" });

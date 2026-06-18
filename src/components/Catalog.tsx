@@ -27,6 +27,9 @@ interface CatalogProps {
   onViewDetailedTamarraBrownies?: () => void;
   onViewDetailedPureStrawberry?: () => void;
   onViewDetailedDateJam?: () => void;
+  onViewDetailedDateSeedDrink?: () => void;
+  onViewDetailedDatesCookies?: () => void;
+  onViewDetailedSusuKurma?: () => void;
 }
 
 // Map each product to its specific gradient styling matching the screenshot precisely
@@ -57,7 +60,7 @@ const PRODUCT_STYLES: Record<string, { gradient: string }> = {
   }
 };
 
-export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam, onViewDetailedToppingKurma, onViewDetailedTamarraBrownies, onViewDetailedPureStrawberry, onViewDetailedDateJam }: CatalogProps) {
+export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam, onViewDetailedToppingKurma, onViewDetailedTamarraBrownies, onViewDetailedPureStrawberry, onViewDetailedDateJam, onViewDetailedDateSeedDrink, onViewDetailedDatesCookies, onViewDetailedSusuKurma }: CatalogProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleInquiryRedirect = () => {
@@ -120,11 +123,17 @@ export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam,
                         onViewDetailedPureStrawberry();
                       } else if (product.id === "prod-date-jam" && onViewDetailedDateJam) {
                         onViewDetailedDateJam();
+                      } else if (product.id === "prod-date-seed-drink" && onViewDetailedDateSeedDrink) {
+                        onViewDetailedDateSeedDrink();
+                      } else if (product.id === "prod-dates-cookies" && onViewDetailedDatesCookies) {
+                        onViewDetailedDatesCookies();
+                      } else if (product.id === "prod-susu-kurma" && onViewDetailedSusuKurma) {
+                        onViewDetailedSusuKurma();
                       } else {
                         setSelectedProduct(product);
                       }
                     }}
-                    className="px-6 py-3 bg-transparent hover:bg-white text-white hover:text-slate-900 font-sans font-extrabold text-[11px] uppercase tracking-wider rounded-xl border border-white/60 hover:border-white transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+                    className="px-6 py-3.5 min-h-[44px] bg-transparent hover:bg-white text-white hover:text-slate-900 font-sans font-extrabold text-[11px] uppercase tracking-wider rounded-xl border border-white/60 hover:border-white transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                   >
                     View Product
                     <ArrowRightCircle className="w-4 h-4 shrink-0" />
@@ -222,7 +231,7 @@ export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam,
               <div className={`p-6 sm:p-8 bg-gradient-to-r ${(PRODUCT_STYLES[selectedProduct.id] || { gradient: "from-slate-600 to-slate-500" }).gradient} text-white relative`}>
                 <button
                   onClick={() => setSelectedProduct(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/15 hover:bg-black/30 text-white transition cursor-pointer"
+                  className="absolute top-4 right-4 p-3 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full bg-black/15 hover:bg-black/30 text-white transition cursor-pointer"
                   title="Close"
                 >
                   <X className="w-4 h-4" />
@@ -336,13 +345,13 @@ export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam,
                 <div className="flex gap-2 w-full sm:w-auto">
                   <button
                     onClick={() => setSelectedProduct(null)}
-                    className="flex-1 sm:flex-none px-4 py-2 border border-slate-200 text-slate-600 hover:text-slate-800 hover:bg-slate-100 font-sans text-xs font-bold rounded-xl transition cursor-pointer"
+                    className="flex-1 sm:flex-none px-4 py-3 min-h-[44px] border border-slate-200 text-slate-600 hover:text-slate-800 hover:bg-slate-100 font-sans text-xs font-bold rounded-xl transition cursor-pointer"
                   >
                     Batal
                   </button>
                   <button
                     onClick={handleInquiryRedirect}
-                    className="flex-1 sm:flex-none px-5 py-2 bg-[#085aa4] hover:bg-blue-700 text-white font-sans text-xs font-bold rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-md shadow-blue-500/10"
+                    className="flex-1 sm:flex-none px-5 py-3 min-h-[44px] bg-[#085aa4] hover:bg-blue-700 text-white font-sans text-xs font-bold rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-md shadow-blue-500/10"
                   >
                     Minta Penawaran Harga & Sampel
                   </button>

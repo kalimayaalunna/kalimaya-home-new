@@ -184,7 +184,7 @@ export default function DateJamDetail({ onBack, onInquire }: DateJamDetailProps)
                 </div>
 
                 <h1 className="font-sans font-black text-white text-4xl sm:text-5xl lg:text-[60px] tracking-tight leading-[1.1] uppercase">
-                  Selai Kurma MPASI
+                  Selai Kurma
                 </h1>
                 
                 <p className="font-sans text-blue-100 text-sm sm:text-base lg:text-lg max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed opacity-95">
