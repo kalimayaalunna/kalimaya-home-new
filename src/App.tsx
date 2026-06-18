@@ -163,7 +163,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-700 selection:bg-blue-100 selection:text-[#085aa4]">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-700 selection:bg-blue-100 selection:text-[#085aa4] w-full overflow-x-hidden relative">
       
       {/* PROFESSIONAL B2B BRAND HEADER & NAV */}
       {currentPage === "home" && (
@@ -553,7 +553,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 50 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none"
+            className="fixed bottom-24 md:bottom-8 right-6 z-50 flex flex-col items-end pointer-events-none"
             id="whatsapp-floater-container"
           >
             {/* Tooltip Chat Bubble with 5s Interval toggle */}
