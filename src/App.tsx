@@ -34,6 +34,7 @@ import AboutDetail from "./components/AboutDetail";
 import DateSeedDrinkDetail from "./components/DateSeedDrinkDetail";
 import DatesCookiesDetail from "./components/DatesCookiesDetail";
 import SusuKurmaDetail from "./components/SusuKurmaDetail";
+import { trackPixelEvent } from "./utils/pixel";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -42,6 +43,50 @@ export default function App() {
   const [showFixedHeader, setShowFixedHeader] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  // Meta Pixel Scroll and Click Tracker
+  React.useEffect(() => {
+    let viewContentFired = false;
+    let scrollTimer: any = null;
+
+    const handleScrollTracking = () => {
+      if (viewContentFired) return;
+      
+      if (!scrollTimer) {
+        // Start a 3 second timer once the user has performed some scroll action
+        scrollTimer = setTimeout(() => {
+          trackPixelEvent("ViewContent");
+          viewContentFired = true;
+          window.removeEventListener("scroll", handleScrollTracking);
+        }, 3000);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollTracking, { passive: true });
+
+    // Global Click listener pointing to WhatsApp triggers the lead event
+    const handleGlobalClick = (e: MouseEvent) => {
+      let target = e.target as HTMLElement | null;
+      while (target && target !== document.body) {
+        if (target.tagName === "A") {
+          const href = (target as HTMLAnchorElement).href;
+          if (href && (href.trim().includes("wa.me") || href.trim().includes("whatsapp.com"))) {
+            trackPixelEvent("Lead");
+            break;
+          }
+        }
+        target = target.parentElement;
+      }
+    };
+
+    document.addEventListener("click", handleGlobalClick);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollTracking);
+      document.removeEventListener("click", handleGlobalClick);
+      if (scrollTimer) clearTimeout(scrollTimer);
+    };
+  }, []);
 
   // Scroll tracking hook
   React.useEffect(() => {
@@ -460,9 +505,6 @@ export default function App() {
           
           {/* Left: Brand Identity Block */}
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-              <span className="font-display font-extrabold text-white text-xs">KI</span>
-            </div>
             <span className="font-display font-bold text-white text-base tracking-tight uppercase">
               PT Kalimaya Alunna Indonesia
             </span>
@@ -488,26 +530,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Quick Navigation */}
-            <div className="space-y-2.5">
-              <h4 className="font-sans text-[11px] font-bold text-slate-300 uppercase tracking-widest">
-                Navigasi Cepat
-              </h4>
-              <div className="flex flex-col gap-2 font-sans text-xs">
-                <button 
-                  onClick={() => scrollTo(catalogRef)} 
-                  className="hover:text-white text-left transition text-slate-400 cursor-pointer"
-                >
-                  Katalog Varian Produk
-                </button>
-                <button 
-                  onClick={() => scrollTo(inquiryRef)} 
-                  className="hover:text-white text-left transition text-slate-400 cursor-pointer"
-                >
-                  Ajukan Proposal Sampel & Harga
-                </button>
-              </div>
-            </div>
+
 
           </div>
 

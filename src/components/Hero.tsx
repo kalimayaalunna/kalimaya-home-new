@@ -64,7 +64,7 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
               className="font-poppins font-extrabold text-white text-3xl sm:text-5xl lg:text-[70px] tracking-tight leading-[1.05] sm:leading-[1.08]"
               id="hero-headline"
             >
-              Bahan Baku Selai & Perasa Premium untuk <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-100 to-white">Bisnis F&B</span>
+              Bahan Baku Selai Premium Untuk <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-100 to-white">Industri F&B</span>
             </motion.h1>
           </div>
 
@@ -76,7 +76,7 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
             className="font-sans text-white/85 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal"
             id="hero-subheadline"
           >
-            Kami membantu industri makanan dan minuman menghadirkan rasa buah yang konsisten, lebih premium, dan tahan proses produksi dengan formulasi rendah gula serta bebas pengawet tambahan.
+            Menghadirkan produk dengan cita rasa buah alami yang lebih berkualitas dan berdaya saing
           </motion.p>
 
           {/* 5. Clean 3 Value Proposition Blocks with Minimalist Icon Design */}
@@ -94,9 +94,6 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
               <h3 className="font-poppins font-semibold text-white text-sm tracking-wide">
                 Rasa Buah Lebih Natural
               </h3>
-              <p className="font-sans text-blue-100/60 text-xs leading-relaxed">
-                Kandungan serat buah utuh asli premium tanpa perisa sintetis berlebih.
-              </p>
             </div>
 
             <div className="space-y-2">
@@ -106,9 +103,6 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
               <h3 className="font-poppins font-semibold text-white text-sm tracking-wide">
                 Stabil untuk Produksi & Baking
               </h3>
-              <p className="font-sans text-blue-100/60 text-xs leading-relaxed">
-                Formulasi khusus bake-stable hingga suhu tinggi panggangan 200°C tanpa meluber.
-              </p>
             </div>
 
             <div className="space-y-2">
@@ -118,9 +112,6 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
               <h3 className="font-poppins font-semibold text-white text-sm tracking-wide">
                 Rendah Gula & Bebas Pengawet
               </h3>
-              <p className="font-sans text-blue-100/60 text-xs leading-relaxed">
-                Aman, konsisten Brix 42° untuk menjaga cita rasa khas buah murni alami.
-              </p>
             </div>
           </motion.div>
           

@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 const BRAND_LOGOS = [
   { name: "Apsara Coffee", url: "https://kalimayaindonesia.com/wp-content/uploads/2026/06/apsara-coffee.webp" },
   { name: "Bake Lab", url: "https://kalimayaindonesia.com/wp-content/uploads/2026/06/bakelab.webp" },
+  { name: "Delifru", url: "https://kalimayaindonesia.com/wp-content/uploads/2026/06/Delifru-New-Thumbnail.webp" },
   { name: "DNA", url: "https://kalimayaindonesia.com/wp-content/uploads/2026/06/dna.jpeg" },
   { name: "Island", url: "https://kalimayaindonesia.com/wp-content/uploads/2026/06/island.webp" },
   { name: "Meditera", url: "https://kalimayaindonesia.com/wp-content/uploads/2026/06/meditera.webp" },
