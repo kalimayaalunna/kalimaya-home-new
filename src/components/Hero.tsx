@@ -15,7 +15,7 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
   return (
     <section 
       id="hero-b2b"
-      className="relative min-h-[850px] lg:min-h-[900px] flex items-center justify-center bg-gradient-to-b from-[#0A3D91] via-[#0A3D91]/95 to-[#0D58C8] text-white overflow-hidden py-20 sm:py-28"
+      className="relative min-h-0 lg:min-h-[900px] flex items-center justify-center bg-gradient-to-b from-[#0A3D91] via-[#0A3D91]/95 to-[#0D58C8] text-white overflow-hidden py-14 sm:py-20 lg:py-28"
     >
       {/* 1. Organic Noise overlay for ultimate premium paper texture split */}
       <div 
@@ -118,14 +118,14 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
         </div>
 
         {/* Right Column: World-Class Showcase with 3D depth floating layers */}
-        <div className="lg:col-span-5 relative flex justify-center items-center h-[450px] lg:h-[550px]" id="hero-showcase-column">
+        <div className="lg:col-span-5 relative flex justify-center items-center h-[280px] sm:h-[400px] lg:h-[550px] overflow-hidden w-full" id="hero-showcase-column">
           
           {/* A. Radial Glow Lembut di Belakang Produk */}
-          <div className="absolute w-[450px] h-[450px] sm:w-[500px] sm:h-[500px] rounded-full bg-blue-300/20 blur-[130px] opacity-75 pointer-events-none -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-0 mix-blend-screen" />
-          <div className="absolute w-[300px] h-[300px] rounded-full bg-[#0D58C8]/30 blur-[100px] opacity-60 pointer-events-none -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-0 mix-blend-screen" />
+          <div className="absolute w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] rounded-full bg-blue-300/20 blur-[130px] opacity-75 pointer-events-none -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-0 mix-blend-screen" />
+          <div className="absolute w-[180px] h-[180px] sm:w-[300px] sm:h-[300px] rounded-full bg-[#0D58C8]/30 blur-[100px] opacity-60 pointer-events-none -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-0 mix-blend-screen" />
           
           {/* B. Soft shadow natural pada podium untuk menggrounding botol */}
-          <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-8 bg-black/45 rounded-full blur-xl z-10 pointer-events-none" />
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-8 bg-black/45 rounded-full blur-xl z-10 pointer-events-none" />
 
           {/* 3D Depth Floating Particles */}
           
@@ -141,7 +141,7 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
               rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
               opacity: { delay: 0.5, duration: 0.8 }
             }}
-            className="absolute -top-4 -left-6 sm:-left-12 w-16 h-16 sm:w-20 sm:h-20 z-20 pointer-events-none select-none filter blur-[2px] opacity-80"
+            className="absolute top-2 left-2 sm:-left-12 w-12 h-12 sm:w-20 sm:h-20 z-20 pointer-events-none select-none filter blur-[1px] opacity-80"
           >
             <img 
               src="https://kalimayaindonesia.com/wp-content/uploads/2026/01/strawberry-image-bait-300x300.png.webp"
@@ -163,7 +163,7 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
               rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
               opacity: { delay: 0.7, duration: 0.8 }
             }}
-            className="absolute -bottom-10 -right-4 sm:-right-8 w-24 h-24 sm:w-28 sm:h-28 z-40 pointer-events-none select-none filter blur-[3.5px] opacity-75"
+            className="absolute bottom-2 right-2 sm:-right-8 w-16 h-16 sm:w-28 sm:h-28 z-40 pointer-events-none select-none filter blur-[2px] opacity-75"
           >
             <img 
               src="https://kalimayaindonesia.com/wp-content/uploads/2026/01/strawberry-image-bait-300x300.png.webp"
@@ -178,13 +178,13 @@ export default function Hero({ onScrollToCatalog, onScrollToInquiry }: HeroProps
             initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 70, damping: 14, delay: 0.3 }}
-            className="relative relative-product-container z-30 p-4"
+            className="relative relative-product-container z-30 p-2"
           >
             <img 
               id="hero-strawberry-jam-img"
               src="https://kalimayaindonesia.com/wp-content/uploads/2025/12/strawberry-jam.png" 
               alt="Premium Raw Strawberry Ingredient supplier Kalimaya Indonesia with splash" 
-              className="w-[320px] sm:w-[415px] md:w-[430px] h-auto object-contain filter drop-shadow-[0_30px_45px_rgba(0,0,0,0.5)] select-none hover:scale-102 transition-transform duration-500 pointer-events-none"
+              className="w-[200px] sm:w-[350px] md:w-[430px] h-auto object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.45)] select-none hover:scale-102 transition-transform duration-500 pointer-events-none"
               referrerPolicy="no-referrer"
             />
           </motion.div>

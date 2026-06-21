@@ -73,7 +73,7 @@ export default function Catalog({ onOpenSampleForm, onViewDetailedStrawberryJam,
   return (
     <section 
       id="product-catalog" 
-      className="py-16 bg-white"
+      className="py-16 bg-white overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">
         

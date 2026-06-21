@@ -553,7 +553,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 50 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="fixed bottom-24 md:bottom-8 right-6 z-50 flex flex-col items-end pointer-events-none"
+            className="fixed bottom-32 md:bottom-8 right-6 z-50 flex flex-col items-end pointer-events-none"
             id="whatsapp-floater-container"
           >
             {/* Tooltip Chat Bubble with 5s Interval toggle */}
